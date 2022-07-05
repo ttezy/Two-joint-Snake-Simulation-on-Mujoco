@@ -1,0 +1,79 @@
+<mujoco>
+   <compiler angle="radian" />
+    <option timestep="0.005" iterations="50" solver="Newton" tolerance="1e-10"/>
+
+    <size njmax="50" nconmax="10" nstack="200"/>
+   <visual>
+     <headlight ambient=".5 .5 .5" />
+   </visual>
+
+    <default>
+        <muscle ctrllimited="true" ctrlrange="0 1"/>
+    </default>
+
+   <asset>
+      <material name="white" rgba="1 1 1 1" />
+      <material name="matplane" reflectance="0.3" texture="texplane" texrepeat="1 1" texuniform="true"/>
+      <texture type="skybox" builtin="gradient" rgb1="0.6 0.6 0.6" rgb2="0 0 0" width="512" height="512"/>
+      <texture name="texplane" type="2d" builtin="checker" rgb1=".25 .25 .25" rgb2=".3 .3 .3" width="512" height="512" mark="cross" markrgb=".8 .8 .8"/>
+   </asset>
+
+   <option gravity="0 0 -9.8" />
+   <worldbody>
+      <light diffuse=".5 .5 .5" pos="0 0 3" dir="0 0 -1"/>
+      <geom name="floor" pos="0 0 0" size="0 0 1" type="plane" material="matplane"/>
+      <body pos="0 0 .1">
+         <joint type="free"/>
+         <inertial pos="0 0 0" mass="1" diaginertia="0.01 0.01 0.01"/>
+         <geom name="body3" type="capsule" size="0.035" fromto="0 0 0  0.5 0 0" rgba=".5 .1 .1 1"/>
+         <body pos="0.5 0 0">
+            <inertial pos="0 0 0" mass="1" diaginertia="0.01 0.01 0.01"/>
+            <geom name="body2" type="capsule" size="0.035" fromto="0 0 0  0.5 0 0" rgba=".1 .1 .5 1"/>
+            <joint name="joint2" type="hinge" pos="0 0 0" limited="true" range="0 120" damping="0.1" />
+            <body pos="0.5 0 0">
+               <inertial pos="0 0 0" mass="1" diaginertia="0.01 0.01 0.01"/>
+               <geom name="body1" type="capsule" size="0.035" fromto="0 0 0  0.5 0 0" rgba=".5 .1 .1 1"/>
+               <!--joint name="joint1"/>
+               <geom name="joint1" type="cylinder" pos="0 0 0" size=".01 .01" rgba=".5 .1 .8 .5" mass="0" group="1"/-->
+               <joint name="joint1" type="hinge" pos="0 0 0" limited="true" range="0 120" damping="0.1"/>
+            </body>
+         </body>
+      </body>
+      <body pos="-0.5 0 0">
+            <geom name="wall1" type="box" pos="0 0 0" size=".05 3 0.5" rgba=".8 .8 .8 .5" mass="1" group="1"/>
+            <geom name="wall2" type="box" pos="6 0 0" size=".05 3 0.5" rgba=".8 .8 .8 .5" mass="1" group="1"/>
+            <geom name="wall3" type="box" pos="3 -3 0" size="3 0.05 0.5" rgba=".8 .8 .8 .5" mass="1" group="1"/>
+            <geom name="wall4" type="box" pos="3 3 0" size="3 0.05 0.5" rgba=".8 .8 .8 .5" mass="1" group="1"/>
+
+            <geom name="obstacle1.1" type="cylinder" pos="1 -2 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle1.2" type="cylinder" pos="1 -1 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle1.3" type="cylinder" pos="1 0 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle1.4" type="cylinder" pos="1 1 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle1.5" type="cylinder" pos="1 2 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle2.1" type="cylinder" pos="2 -2 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle2.2" type="cylinder" pos="2 -1 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle2.3" type="cylinder" pos="2 0 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle2.4" type="cylinder" pos="2 1 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle2.5" type="cylinder" pos="2 2 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle3.1" type="cylinder" pos="3 -2 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle3.2" type="cylinder" pos="3 -1 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle3.3" type="cylinder" pos="3 0 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle3.4" type="cylinder" pos="3 1 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle3.5" type="cylinder" pos="3 2 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle4.1" type="cylinder" pos="4 -2 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle4.2" type="cylinder" pos="4 -1 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle4.3" type="cylinder" pos="4 0 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle4.4" type="cylinder" pos="4 1 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle4.5" type="cylinder" pos="4 2 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+             <geom name="obstacle5.1" type="cylinder" pos="5 -2 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle5.2" type="cylinder" pos="5 -1 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle5.3" type="cylinder" pos="5 0 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle5.4" type="cylinder" pos="5 1 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+            <geom name="obstacle5.5" type="cylinder" pos="5 2 0" size=".03 .2" rgba=".5 .1 .8 .5" mass="0" group="1"/>
+        </body>
+   </worldbody>
+   <actuator>
+        <motor gear="2000.0" joint="joint1"/>
+        <motor gear="2000.0" joint="joint2"/>
+    </actuator>
+</mujoco>
